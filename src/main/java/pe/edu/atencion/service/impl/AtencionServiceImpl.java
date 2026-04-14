@@ -22,7 +22,6 @@ public class AtencionServiceImpl implements AtencionService {
         this.atencionRepository = atencionRepository;
     }
 
-    @Override
     @Transactional(readOnly = true)
     public List<AtencionDTO> listarTodas() {
         return atencionRepository.findAll()
@@ -31,7 +30,6 @@ public class AtencionServiceImpl implements AtencionService {
                 .toList();
     }
 
-    @Override
     @Transactional(readOnly = true)
     public List<AtencionDTO> historialPaciente(String nombre, String apellido) {
         return atencionRepository
@@ -41,7 +39,6 @@ public class AtencionServiceImpl implements AtencionService {
                 .toList();
     }
 
-    @Override
     @Transactional(readOnly = true)
     public List<AtencionDTO> listarPorRango(LocalDate inicio, LocalDate fin) {
         return atencionRepository
@@ -51,15 +48,13 @@ public class AtencionServiceImpl implements AtencionService {
                 .toList();
     }
 
-    @Override
     public AtencionDTO crear(AtencionDTO dto) {
         Atencion entity = AtencionMapper.toEntity(dto);
-        entity.setId(null); // aseguramos crear
+        entity.setId(null);
         Atencion saved = atencionRepository.save(entity);
         return AtencionMapper.toDto(saved);
     }
 
-    @Override
     public Optional<AtencionDTO> actualizar(Integer id, AtencionDTO dto) {
         return atencionRepository.findById(id)
                 .map(existing -> {
@@ -74,11 +69,8 @@ public class AtencionServiceImpl implements AtencionService {
                 });
     }
 
-    @Override
     public boolean eliminar(Integer id) {
-        if (!atencionRepository.existsById(id)) {
-            return false;
-        }
+        if (!atencionRepository.existsById(id)) return false;
         atencionRepository.deleteById(id);
         return true;
     }

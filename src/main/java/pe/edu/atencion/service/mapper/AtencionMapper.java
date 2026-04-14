@@ -1,4 +1,4 @@
-package pe.edu.atencion.repository;
+package pe.edu.atencion.service.mapper;
 
 import pe.edu.atencion.dto.AtencionDTO;
 import pe.edu.atencion.entity.Atencion;
